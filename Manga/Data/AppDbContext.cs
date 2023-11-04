@@ -9,9 +9,9 @@ namespace Manga.Data
         {
         }
 
-        DbSet<MangaTitle> MangaTitles { get; set; }
-        DbSet<MangaChapter> MangaChapters { get; set; }
-        DbSet<MangaPage> MangaPages { get; set; }
+        public DbSet<MangaTitle> MangaTitles { get; set; }
+        public DbSet<MangaChapter> MangaChapters { get; set; }
+        public DbSet<MangaPage> MangaPages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
