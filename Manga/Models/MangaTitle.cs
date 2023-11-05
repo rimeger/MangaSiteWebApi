@@ -8,7 +8,7 @@
         public string Description { get; set; }
         public string PosterUrl { get; set; }
         public DateTime CreatedDate { get; set; }
-        public DateTime UpdatedName { get; set; }
+        public DateTime UpdatedDate { get; set; }
         public ICollection<MangaChapter> Chapters { get; set; }
     }
 }
