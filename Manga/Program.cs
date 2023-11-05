@@ -1,4 +1,9 @@
+using Manga;
 using Manga.Data;
+using Manga.Repositories;
+using Manga.Repositories.IRepositories;
+using Manga.Services;
+using Manga.Services.IServices;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +19,17 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString"));
 });
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+
+builder.Services.AddScoped<IMangaTitleRepository, MangaTitleRepository>();
+builder.Services.AddScoped<IMangaChapterRepository, MangaChapterRepository>();
+builder.Services.AddScoped<IMangaPageRepository, MangaPageRepository>();
+
+builder.Services.AddScoped<IMangaTitleService, MangaTitleService>();
+builder.Services.AddScoped<IMangaChapterService, MangaChapterService>();
+builder.Services.AddScoped<IMangaPageService, MangaPageService>();
+
+builder.Services.AddAutoMapper(typeof(MappingConfig));
 
 var app = builder.Build();
 
