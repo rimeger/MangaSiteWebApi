@@ -21,7 +21,7 @@ namespace Manga.Repositories
         public async Task UpdateAsync(MangaChapter entity)
         {
             _dbContext.MangaChapters.Update(entity);
-            await _dbContext.SaveChangesAsync();
+            await SaveAsync();
         }
     }
 }
