@@ -18,6 +18,7 @@ namespace Manga.Controllers
         {
             _mediator = mediator;
         }
+
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult> GetAllTitles()
@@ -25,7 +26,7 @@ namespace Manga.Controllers
             return Ok(await _mediator.Send(new GetAllTitlesRequest()));
         }
 
-        [HttpGet("{id:Guid}")]
+        [HttpGet("{id:Guid}", Name = "GetTitle")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -39,8 +40,8 @@ namespace Manga.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> CreateTitle([FromBody] CreateTitleCommand command)
         {
-            await _mediator.Send(command);
-            return NoContent();
+            var title = await _mediator.Send(command);
+            return CreatedAtRoute("GetTitle", new { id = title.Id }, title);
         }
 
         [HttpPut]
