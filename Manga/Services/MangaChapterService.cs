@@ -37,6 +37,11 @@ namespace Manga.Services
             await _chapterRepository.RemoveAsync(entity);
         }
 
+        public async Task Untrack(MangaChapter entity)
+        {
+            await _chapterRepository.Untrack(entity);
+        }
+
         public async Task UpdateAsync(MangaChapter entity)
         {
             await _chapterRepository.UpdateAsync(entity);

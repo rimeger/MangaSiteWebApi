@@ -9,6 +9,7 @@ namespace Manga.Services.IServices
         Task CreateAsync(MangaPage entity);
         Task UpdateAsync(MangaPage entity);
         Task RemoveAsync(MangaPage entity);
+        Task Untrack(MangaPage entity);
         Task<List<MangaPage>> GetAllByChapterAsync(MangaChapter mangaChapter);
     }
 }
