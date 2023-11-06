@@ -25,7 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="MediatR\MangaChapter\" />
     <Folder Include="MediatR\MangaPage\" />
   </ItemGroup>
 
