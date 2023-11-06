@@ -14,11 +14,6 @@ namespace Manga.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task Untrack(MangaTitle entity)
-        {
-            _dbContext.Entry(entity).State = EntityState.Detached;
-        }
-
         public async Task UpdateAsync(MangaTitle entity)
         {
             _dbContext.MangaTitles.Update(entity);

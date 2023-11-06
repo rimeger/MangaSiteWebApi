@@ -1,4 +1,6 @@
-﻿namespace Manga.Repositories.IRepositories
+﻿using Manga.Models;
+
+namespace Manga.Repositories.IRepositories
 {
     public interface IRepository<T> where T: class
     {
@@ -6,6 +8,7 @@
         Task<T> GetByIdAsync (Guid id);
         Task CreateAsync (T entity);
         Task RemoveAsync (T entity);
+        Task Untrack(T entity);
         Task SaveAsync();
     }
 }

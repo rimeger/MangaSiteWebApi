@@ -1,4 +1,5 @@
 ﻿using Manga.Data;
+using Manga.Models;
 using Manga.Repositories.IRepositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -39,6 +40,11 @@ namespace Manga.Repositories
         public async Task SaveAsync()
         {
             await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task Untrack(T entity)
+        {
+            _dbContext.Entry(entity).State = EntityState.Detached;
         }
     }
 }
