@@ -19,6 +19,10 @@ namespace Manga
             CreateMap<MangaChapter, MangaChapterDto>().ReverseMap();
             CreateMap<MangaChapter, CreateChapterCommand>().ReverseMap();
             CreateMap<MangaChapter, UpdateChapterCommand>().ReverseMap();
+
+            CreateMap<MangaPage, MangaPageDto>().ReverseMap();
+            //CreateMap<MangaPage, CreatePageCommand>().ReverseMap();
+            //CreateMap<MangaPage, UpdatePageCommand>().ReverseMap();
         }
     }
 }
