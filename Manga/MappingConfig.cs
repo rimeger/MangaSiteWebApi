@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Manga.MediatR.MangaChapter.Commands.Create;
 using Manga.MediatR.MangaChapter.Commands.Update;
+using Manga.MediatR.MangaPage.Commands.Create;
+using Manga.MediatR.MangaPage.Commands.Update;
 using Manga.MediatR.MangaTitle.Commands.Create;
 using Manga.MediatR.MangaTitle.Commands.Update;
 using Manga.Models;
@@ -21,8 +23,8 @@ namespace Manga
             CreateMap<MangaChapter, UpdateChapterCommand>().ReverseMap();
 
             CreateMap<MangaPage, MangaPageDto>().ReverseMap();
-            //CreateMap<MangaPage, CreatePageCommand>().ReverseMap();
-            //CreateMap<MangaPage, UpdatePageCommand>().ReverseMap();
+            CreateMap<MangaPage, CreatePageCommand>().ReverseMap();
+            CreateMap<MangaPage, UpdatePageCommand>().ReverseMap();
         }
     }
 }

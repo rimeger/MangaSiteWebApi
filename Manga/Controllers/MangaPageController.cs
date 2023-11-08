@@ -1,4 +1,6 @@
-﻿using Manga.MediatR.MangaChapter.Requests.GetAllByTitle;
+﻿using Manga.MediatR.MangaPage.Commands.Create;
+using Manga.MediatR.MangaPage.Commands.Delete;
+using Manga.MediatR.MangaPage.Commands.Update;
 using Manga.MediatR.MangaPage.Requests.GetAll;
 using Manga.MediatR.MangaPage.Requests.GetAllByChapter;
 using Manga.MediatR.MangaPage.Requests.GetById;
@@ -34,31 +36,31 @@ namespace Manga.Controllers
             return Ok(await _mediator.Send(new GetPageByIdRequest(id)));
         }
 
-        //[HttpPost]
-        //[ProducesResponseType(StatusCodes.Status201Created)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //public async Task<ActionResult> CreateTitle([FromBody] CreateTitleCommand command)
-        //{
-        //    await _mediator.Send(command);
-        //    return NoContent();
-        //}
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> CreatePage([FromBody] CreatePageCommand command)
+        {
+            var page = await _mediator.Send(command);
+            return CreatedAtRoute("GetPage", new { id = page.Id }, page);
+        }
 
-        //[HttpPut]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //public async Task<ActionResult> UpdateTitle([FromBody] UpdateTitleCommand command)
-        //{
-        //    await _mediator.Send(command);
-        //    return NoContent();
-        //}
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> UpdatePage([FromBody] UpdatePageCommand command)
+        {
+            await _mediator.Send(command);
+            return NoContent();
+        }
 
         [HttpDelete("{id:Guid}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> DeleteMangaPage(Guid id)
+        public async Task<ActionResult> DeletePage(Guid id)
         {
-            await _mediator.Send(new DeleteTitleCommand(id));
+            await _mediator.Send(new DeletePageCommand(id));
             return NoContent();
         }
 

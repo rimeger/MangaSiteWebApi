@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Manga.MediatR.MangaPage.Requests.GetAll
 {
-    public class GetAllPagesRequestHandler : IRequestHandler<GetAllPagesRequest, List<MangaPageDto>
+    public class GetAllPagesRequestHandler : IRequestHandler<GetAllPagesRequest, List<MangaPageDto>>
     {
         private readonly IMangaPageService _pageService;
         private readonly IMapper _mapper;
