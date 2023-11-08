@@ -58,7 +58,7 @@ namespace Manga.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> DeleteMangaChapter(Guid id)
+        public async Task<ActionResult> DeleteChapter(Guid id)
         {
             await _mediator.Send(new DeleteChapterCommand(id));
             return NoContent();
