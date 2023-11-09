@@ -1,8 +1,11 @@
-﻿using Manga.MediatR.MangaTitle.Commands.Create;
+﻿using FluentValidation;
+using Manga.Exceptions;
+using Manga.MediatR.MangaTitle.Commands.Create;
 using Manga.MediatR.MangaTitle.Commands.Delete;
 using Manga.MediatR.MangaTitle.Commands.Update;
 using Manga.MediatR.MangaTitle.Requests.GetAll;
 using Manga.MediatR.MangaTitle.Requests.GetById;
+using Manga.Models.Dto;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,7 +34,16 @@ namespace Manga.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> GetTitleById(Guid id)
         {
-            return Ok(await _mediator.Send(new GetTitleByIdRequest(id)));
+            MangaTitleDto title;
+            try 
+            {
+                title = await _mediator.Send(new GetTitleByIdRequest(id));
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            return Ok(title);
         }
 
         [HttpPost]
@@ -39,16 +51,36 @@ namespace Manga.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> CreateTitle([FromBody] CreateTitleCommand command)
         {
-            var title = await _mediator.Send(command);
+            MangaTitleDto title;
+            try
+            {
+                title = await _mediator.Send(command);
+            }
+            catch(ValidationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
             return CreatedAtRoute("GetTitle", new { id = title.Id }, title);
         }
 
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> UpdateTitle([FromBody] UpdateTitleCommand command)
         {
-            await _mediator.Send(command);
+            try
+            {
+                await _mediator.Send(command);
+            }
+            catch (ValidationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
             return NoContent();
         }
 
@@ -57,7 +89,14 @@ namespace Manga.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> DeleteTitle(Guid id)
         {
-            await _mediator.Send(new DeleteTitleCommand(id));
+            try
+            {
+                await _mediator.Send(new DeleteTitleCommand(id));
+            }
+            catch(NotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
             return NoContent();
         }
     }

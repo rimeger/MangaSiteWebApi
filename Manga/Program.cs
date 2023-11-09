@@ -1,3 +1,4 @@
+using FluentValidation;
 using Manga;
 using Manga.Data;
 using Manga.Repositories;
@@ -20,6 +21,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString"));
 });
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
+
+ValidatorOptions.Global.LanguageManager.Enabled = false;
 
 builder.Services.AddScoped<IMangaTitleRepository, MangaTitleRepository>();
 builder.Services.AddScoped<IMangaChapterRepository, MangaChapterRepository>();

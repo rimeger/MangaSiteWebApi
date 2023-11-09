@@ -1,4 +1,5 @@
-﻿using Manga.Services.IServices;
+﻿using Manga.Exceptions;
+using Manga.Services.IServices;
 using MediatR;
 
 namespace Manga.MediatR.MangaTitle.Commands.Delete
@@ -14,6 +15,10 @@ namespace Manga.MediatR.MangaTitle.Commands.Delete
         public async Task Handle(DeleteTitleCommand request, CancellationToken cancellationToken)
         {
             var title = await _titleService.GetByIdAsync(request.id);
+            if (title is null)
+            {
+                throw new NotFoundException($"There is no title with id {request.id}"); 
+            }
             await _titleService.RemoveAsync(title);
         }
     }
