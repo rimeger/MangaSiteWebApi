@@ -30,7 +30,6 @@ namespace Manga.Controllers
         [HttpGet("{id:Guid}", Name = "GetChapter")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> GetChapterById(Guid id)
         {
             return Ok(await _mediator.Send(new GetChapterByIdRequest(id)));
@@ -46,7 +45,7 @@ namespace Manga.Controllers
         }
 
         [HttpPut]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> UpdateChapter([FromBody] UpdateChapterCommand command)
         {
@@ -57,7 +56,6 @@ namespace Manga.Controllers
         [HttpDelete("{id:Guid}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> DeleteChapter(Guid id)
         {
             await _mediator.Send(new DeleteChapterCommand(id));
@@ -67,7 +65,6 @@ namespace Manga.Controllers
         [HttpGet("MangaTitle/{titleId:Guid}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> GetAllChaptersByTitle(Guid titleId)
         {
             return Ok(await _mediator.Send(new GetAllChaptersByTitleRequest(titleId)));

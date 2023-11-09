@@ -29,7 +29,6 @@ namespace Manga.Controllers
         [HttpGet("{id:Guid}", Name = "GetTitle")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> GetTitleById(Guid id)
         {
             return Ok(await _mediator.Send(new GetTitleByIdRequest(id)));
@@ -45,7 +44,7 @@ namespace Manga.Controllers
         }
 
         [HttpPut]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> UpdateTitle([FromBody] UpdateTitleCommand command)
         {
@@ -56,7 +55,6 @@ namespace Manga.Controllers
         [HttpDelete("{id:Guid}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> DeleteTitle(Guid id)
         {
             await _mediator.Send(new DeleteTitleCommand(id));
