@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Manga.Exceptions;
 using Manga.Models.Dto;
 using Manga.Services.IServices;
 using MediatR;
@@ -20,6 +21,10 @@ namespace Manga.MediatR.MangaPage.Requests.GetAllByChapter
         public async Task<List<MangaPageDto>> Handle(GetAllPagesByChapterRequest request, CancellationToken cancellationToken)
         {
             var chapter = await _chapterService.GetByIdAsync(request.id);
+            if(chapter is null)
+            {
+                throw new NotFoundException($"There is no chapter with id {request.id}");
+            }
             var pages = await _pageService.GetAllByChapterAsync(chapter);
             return _mapper.Map<List<MangaPageDto>>(pages);
         }

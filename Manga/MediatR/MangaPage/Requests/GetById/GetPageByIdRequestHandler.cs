@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Manga.Exceptions;
 using Manga.Models.Dto;
 using Manga.Services.IServices;
 using MediatR;
@@ -18,6 +19,10 @@ namespace Manga.MediatR.MangaPage.Requests.GetById
         public async Task<MangaPageDto> Handle(GetPageByIdRequest request, CancellationToken cancellationToken)
         {
             var page = await _pageService.GetByIdAsync(request.id);
+            if(page is null)
+            {
+                throw new NotFoundException($"There is no page with id {request.id}");
+            }
             return _mapper.Map<MangaPageDto>(page);
         }
     }
