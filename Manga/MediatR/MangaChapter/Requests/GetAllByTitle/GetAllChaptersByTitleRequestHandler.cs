@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Manga.Exceptions;
 using Manga.Models.Dto;
 using Manga.Services.IServices;
 using MediatR;
@@ -20,6 +21,10 @@ namespace Manga.MediatR.MangaChapter.Requests.GetAllByTitle
         async Task<List<MangaChapterDto>> IRequestHandler<GetAllChaptersByTitleRequest, List<MangaChapterDto>>.Handle(GetAllChaptersByTitleRequest request, CancellationToken cancellationToken)
         {
             var title = await _titleService.GetByIdAsync(request.id);
+            if (title is null)
+            {
+                throw new NotFoundException($"There is no title with id {request.id}");
+            }
             var chapters = await _chapterService.GetAllByTitleAsync(title);
             return _mapper.Map<List<MangaChapterDto>>(chapters);
         }

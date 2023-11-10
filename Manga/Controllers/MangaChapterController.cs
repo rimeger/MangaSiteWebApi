@@ -1,9 +1,12 @@
-﻿using Manga.MediatR.MangaChapter.Commands.Create;
+﻿using FluentValidation;
+using Manga.Exceptions;
+using Manga.MediatR.MangaChapter.Commands.Create;
 using Manga.MediatR.MangaChapter.Commands.Delete;
 using Manga.MediatR.MangaChapter.Commands.Update;
 using Manga.MediatR.MangaChapter.Requests.GetAll;
 using Manga.MediatR.MangaChapter.Requests.GetAllByTitle;
 using Manga.MediatR.MangaChapter.Requests.GetById;
+using Manga.Models.Dto;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,7 +35,16 @@ namespace Manga.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> GetChapterById(Guid id)
         {
-            return Ok(await _mediator.Send(new GetChapterByIdRequest(id)));
+            MangaChapterDto chapter;
+            try
+            {
+                chapter = await _mediator.Send(new GetChapterByIdRequest(id));
+            }
+            catch(NotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            return Ok(chapter);
         }
 
         [HttpPost]
@@ -40,7 +52,19 @@ namespace Manga.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> CreateChapter([FromBody] CreateChapterCommand command)
         {
-            var chapter = await _mediator.Send(command);
+            MangaChapterDto chapter;
+            try
+            {
+                chapter = await _mediator.Send(command);
+            }
+            catch (ValidationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
             return CreatedAtRoute("GetChapter", new {id = chapter.Id}, chapter);
         }
 
@@ -49,7 +73,18 @@ namespace Manga.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> UpdateChapter([FromBody] UpdateChapterCommand command)
         {
-            await _mediator.Send(command);
+            try
+            {
+                await _mediator.Send(command);
+            }
+            catch (ValidationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
             return NoContent();
         }
 
@@ -58,7 +93,14 @@ namespace Manga.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> DeleteChapter(Guid id)
         {
-            await _mediator.Send(new DeleteChapterCommand(id));
+            try
+            {
+                await _mediator.Send(new DeleteChapterCommand(id));
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
             return NoContent();
         }
 
@@ -67,7 +109,16 @@ namespace Manga.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> GetAllChaptersByTitle(Guid titleId)
         {
-            return Ok(await _mediator.Send(new GetAllChaptersByTitleRequest(titleId)));
+            List<MangaChapterDto> chapters;
+            try
+            {
+                chapters = await _mediator.Send(new GetAllChaptersByTitleRequest(titleId));
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            return Ok(chapters);
         }
     }
 }
