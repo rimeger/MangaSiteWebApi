@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Manga", "Manga\Manga.csproj", "{B840E396-F0C1-4595-B507-63A5E4B37289}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Manga.Domain", "src\Manga.Domain\Manga.Domain.csproj", "{7AB363E9-37BA-4A50-84C6-A681035549C8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{24A1DDD3-96BF-4779-905B-046E6C16CB09}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Manga.Application", "src\Manga.Application\Manga.Application.csproj", "{3D850F8E-08A2-4766-89E0-E0F842A10D8A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Manga.Infrastructure", "src\Manga.Infrastructure\Manga.Infrastructure.csproj", "{EA07F7AF-5397-4C2F-BB3A-78487DF55825}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Manga.WebAPI", "src\Manga.Presentation\Manga.WebAPI.csproj", "{A6C30BAE-7422-4B68-BBC4-16D35CDA9910}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,13 +19,31 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B840E396-F0C1-4595-B507-63A5E4B37289}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B840E396-F0C1-4595-B507-63A5E4B37289}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B840E396-F0C1-4595-B507-63A5E4B37289}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B840E396-F0C1-4595-B507-63A5E4B37289}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AB363E9-37BA-4A50-84C6-A681035549C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AB363E9-37BA-4A50-84C6-A681035549C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AB363E9-37BA-4A50-84C6-A681035549C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AB363E9-37BA-4A50-84C6-A681035549C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D850F8E-08A2-4766-89E0-E0F842A10D8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D850F8E-08A2-4766-89E0-E0F842A10D8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D850F8E-08A2-4766-89E0-E0F842A10D8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D850F8E-08A2-4766-89E0-E0F842A10D8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA07F7AF-5397-4C2F-BB3A-78487DF55825}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA07F7AF-5397-4C2F-BB3A-78487DF55825}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA07F7AF-5397-4C2F-BB3A-78487DF55825}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA07F7AF-5397-4C2F-BB3A-78487DF55825}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6C30BAE-7422-4B68-BBC4-16D35CDA9910}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6C30BAE-7422-4B68-BBC4-16D35CDA9910}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6C30BAE-7422-4B68-BBC4-16D35CDA9910}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6C30BAE-7422-4B68-BBC4-16D35CDA9910}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7AB363E9-37BA-4A50-84C6-A681035549C8} = {24A1DDD3-96BF-4779-905B-046E6C16CB09}
+		{3D850F8E-08A2-4766-89E0-E0F842A10D8A} = {24A1DDD3-96BF-4779-905B-046E6C16CB09}
+		{EA07F7AF-5397-4C2F-BB3A-78487DF55825} = {24A1DDD3-96BF-4779-905B-046E6C16CB09}
+		{A6C30BAE-7422-4B68-BBC4-16D35CDA9910} = {24A1DDD3-96BF-4779-905B-046E6C16CB09}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7D5E4966-7A7B-40B3-BEE6-D5B6524FB482}
