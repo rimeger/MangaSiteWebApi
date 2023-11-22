@@ -9,7 +9,7 @@ using Manga.Application.Features.TitleFeatures.Queries.GetById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Manga.Presentation.Controllers
+namespace Manga.WebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
