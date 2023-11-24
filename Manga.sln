@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Manga.Application", "src\Ma
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Manga.Infrastructure", "src\Manga.Infrastructure\Manga.Infrastructure.csproj", "{EA07F7AF-5397-4C2F-BB3A-78487DF55825}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Manga.WebAPI", "src\Manga.Presentation\Manga.WebAPI.csproj", "{A6C30BAE-7422-4B68-BBC4-16D35CDA9910}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Manga.WebAPI", "src\Manga.WebAPI\Manga.WebAPI.csproj", "{A6C30BAE-7422-4B68-BBC4-16D35CDA9910}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Manga.UnitTests", "tests\Manga.UnitTests\Manga.UnitTests.csproj", "{921B2D84-892D-4594-99F4-5B07E5C3A145}"
 EndProject
