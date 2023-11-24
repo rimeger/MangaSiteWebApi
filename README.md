@@ -22,6 +22,7 @@ In this web api, user can read, create, update and delete:
 * SqlServer
 * AutoMapper
 * MediatR
+* Fluent Validation
 * xUnit
 * Fluent Assertions
 * NSubstitute   
