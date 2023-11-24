@@ -35,11 +35,11 @@ namespace Manga.Application.Features.PageFeatures.Commands.Update
                 throw new NotFoundException($"There is no page with id {request.Id}");
             }
 
-            await _pageService.Untrack(originalPage);
+            _pageService.Untrack(originalPage);
             var updatedPage = _mapper.Map<MangaPage>(request);
             updatedPage.UpdatedDate = DateTime.Now;
             updatedPage.CreatedDate = originalPage.CreatedDate;
-            await _pageService.UpdateAsync(updatedPage);
+            _pageService.Update(updatedPage);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Manga.Application.Features.TitleFeatures.Commands.Delete
             {
                 throw new NotFoundException($"There is no title with id {request.id}"); 
             }
-            await _titleService.RemoveAsync(title);
+            _titleService.Remove(title);
         }
     }
 }

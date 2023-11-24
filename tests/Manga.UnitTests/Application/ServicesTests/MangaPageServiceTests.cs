@@ -62,7 +62,7 @@ namespace Manga.UnitTests.Application.ServicesTests
             result.Should().BeEquivalentTo(expectedPage);
         }
         [Fact]
-        public async void RemoveAsync_Should_CallRemoveOnce()
+        public void RemoveAsync_Should_CallRemoveOnce()
         {
             //Arrange
             var page = new MangaPage
@@ -72,13 +72,13 @@ namespace Manga.UnitTests.Application.ServicesTests
             };
 
             //Act
-            await _pageService.RemoveAsync(page);
+            _pageService.Remove(page);
 
             //Assert
-            await _pageRepositoryMock.Received(1).RemoveAsync(page);
+            _pageRepositoryMock.Received(1).Remove(page);
         }
         [Fact]
-        public async void Untrack_Should_CallUntrackOnce()
+        public void Untrack_Should_CallUntrackOnce()
         {
             //Arrange
             var page = new MangaPage
@@ -88,13 +88,13 @@ namespace Manga.UnitTests.Application.ServicesTests
             };
 
             //Act
-            await _pageService.Untrack(page);
+            _pageService.Untrack(page);
 
             //Assert
-            await _pageRepositoryMock.Received(1).Untrack(page);
+            _pageRepositoryMock.Received(1).Untrack(page);
         }
         [Fact]
-        public async void UpdateAsync_Should_CallUpdateOnce()
+        public void UpdateAsync_Should_CallUpdateOnce()
         {
             //Arrange
             var page = new MangaPage
@@ -104,10 +104,10 @@ namespace Manga.UnitTests.Application.ServicesTests
             };
 
             //Act
-            await _pageService.UpdateAsync(page);
+            _pageService.Update(page);
 
             //Assert
-            await _pageRepositoryMock.Received(1).UpdateAsync(page);
+            _pageRepositoryMock.Received(1).Update(page);
         }
         [Fact]
         public async void CreateAsync_Should_CallCreateOnce()

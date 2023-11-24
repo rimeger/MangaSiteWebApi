@@ -17,7 +17,6 @@ namespace Manga.Infrastructure.Repositories
         public async Task CreateAsync(T entity)
         {
             await _dbSet.AddAsync(entity);
-            await SaveAsync();
         }
 
         public async Task<List<T>> GetAllAsync()
@@ -30,21 +29,14 @@ namespace Manga.Infrastructure.Repositories
             return await _dbSet.FindAsync(id);
         }
 
-        public async Task RemoveAsync(T entity)
+        public void Remove(T entity)
         {
             _dbSet.Remove(entity);
-            await SaveAsync();
         }
 
-        public async Task SaveAsync()
-        {
-            await _dbContext.SaveChangesAsync();
-        }
-
-        public Task Untrack(T entity)
+        public void Untrack(T entity)
         {
             _dbContext.Entry(entity).State = EntityState.Detached;
-            return Task.CompletedTask;
         }
     }
 }

@@ -35,12 +35,12 @@ namespace Manga.Application.Features.ChapterFeatures.Commands.Update
                 throw new NotFoundException($"There is no chapter with id {request.Id}");
             }
 
-            await _chapterService.Untrack(originalChapter);
+            _chapterService.Untrack(originalChapter);
             var updatedChapter = _mapper.Map<MangaChapter>(request);
             updatedChapter.UpdatedDate = DateTime.Now;
             updatedChapter.CreatedDate = originalChapter.CreatedDate;
             updatedChapter.MangaTitle = originalChapter.MangaTitle;
-            await _chapterService.UpdateAsync(updatedChapter);
+            _chapterService.Update(updatedChapter);
         }
     }
 }

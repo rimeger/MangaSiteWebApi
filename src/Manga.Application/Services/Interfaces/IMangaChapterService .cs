@@ -7,9 +7,9 @@ namespace Manga.Application.Services.Interfaces
         Task<List<MangaChapter>> GetAllAsync();
         Task<MangaChapter> GetByIdAsync(Guid id);
         Task CreateAsync(MangaChapter entity);
-        Task UpdateAsync(MangaChapter entity);
-        Task RemoveAsync(MangaChapter entity);
-        Task Untrack(MangaChapter entity);
+        void Update(MangaChapter entity);
+        void Remove(MangaChapter entity);
+        void Untrack(MangaChapter entity);
         Task<List<MangaChapter>> GetAllByTitleAsync(MangaTitle mangaTitle);
     }
 }

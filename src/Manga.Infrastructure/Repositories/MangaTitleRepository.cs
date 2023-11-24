@@ -13,10 +13,9 @@ namespace Manga.Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task UpdateAsync(MangaTitle entity)
+        public void Update(MangaTitle entity)
         {
             _dbContext.MangaTitles.Update(entity);
-            await SaveAsync();
         }
     }
 }

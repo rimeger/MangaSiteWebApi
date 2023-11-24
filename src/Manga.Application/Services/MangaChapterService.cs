@@ -32,19 +32,19 @@ namespace Manga.Application.Services
             return await _chapterRepository.GetByIdAsync(id);
         }
 
-        public async Task RemoveAsync(MangaChapter entity)
+        public void Remove(MangaChapter entity)
         {
-            await _chapterRepository.RemoveAsync(entity);
+            _chapterRepository.Remove(entity);
         }
 
-        public async Task Untrack(MangaChapter entity)
+        public void Untrack(MangaChapter entity)
         {
-            await _chapterRepository.Untrack(entity);
+            _chapterRepository.Untrack(entity);
         }
 
-        public async Task UpdateAsync(MangaChapter entity)
+        public void Update(MangaChapter entity)
         {
-            await _chapterRepository.UpdateAsync(entity);
+            _chapterRepository.Update(entity);
         }
     }
 }

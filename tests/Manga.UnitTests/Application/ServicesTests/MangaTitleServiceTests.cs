@@ -66,7 +66,7 @@ namespace Manga.UnitTests.Application.ServicesTests
             result.Should().BeEquivalentTo(expectedTitle);
         }
         [Fact]
-        public async void RemoveAsync_Should_CallRemoveOnce()
+        public void RemoveAsync_Should_CallRemoveOnce()
         {
             //Arrange
             var title = new MangaTitle
@@ -78,13 +78,13 @@ namespace Manga.UnitTests.Application.ServicesTests
             };
 
             //Act
-            await _titleService.RemoveAsync(title);
+            _titleService.Remove(title);
 
             //Assert
-            await _titleRepositoryMock.Received(1).RemoveAsync(title);
+            _titleRepositoryMock.Received(1).Remove(title);
         }
         [Fact]
-        public async void Untrack_Should_CallUntrackOnce()
+        public void Untrack_Should_CallUntrackOnce()
         {
             //Arrange
             var title = new MangaTitle
@@ -96,13 +96,13 @@ namespace Manga.UnitTests.Application.ServicesTests
             };
 
             //Act
-            await _titleService.Untrack(title);
+            _titleService.Untrack(title);
 
             //Assert
-            await _titleRepositoryMock.Received(1).Untrack(title);
+            _titleRepositoryMock.Received(1).Untrack(title);
         }
         [Fact]
-        public async void UpdateAsync_Should_CallUpdateOnce()
+        public void UpdateAsync_Should_CallUpdateOnce()
         {
             //Arrange
             var title = new MangaTitle
@@ -114,10 +114,10 @@ namespace Manga.UnitTests.Application.ServicesTests
             };
 
             //Act
-            await _titleService.UpdateAsync(title);
+            _titleService.Update(title);
 
             //Assert
-            await _titleRepositoryMock.Received(1).UpdateAsync(title);
+            _titleRepositoryMock.Received(1).Update(title);
         }
         [Fact]
         public async void CreateAsync_Should_CallCreateOnce()

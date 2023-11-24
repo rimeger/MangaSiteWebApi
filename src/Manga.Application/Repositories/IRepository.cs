@@ -5,8 +5,7 @@
         Task<List<T>> GetAllAsync();
         Task<T> GetByIdAsync (Guid id);
         Task CreateAsync (T entity);
-        Task RemoveAsync (T entity);
-        Task Untrack(T entity);
-        Task SaveAsync();
+        void Remove (T entity);
+        void Untrack(T entity);
     }
 }

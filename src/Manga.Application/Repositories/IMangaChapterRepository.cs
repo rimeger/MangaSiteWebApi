@@ -4,7 +4,7 @@ namespace Manga.Application.Repositories
 {
     public interface IMangaChapterRepository : IRepository<MangaChapter>
     {
-        Task UpdateAsync(MangaChapter entity);
+        void Update(MangaChapter entity);
         Task<List<MangaChapter>> GetAllByTitleAsync(MangaTitle mangaTitle);
     }
 }

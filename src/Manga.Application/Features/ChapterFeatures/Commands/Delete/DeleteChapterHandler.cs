@@ -22,7 +22,7 @@ namespace Manga.Application.Features.ChapterFeatures.Commands.Delete
             {
                 throw new NotFoundException($"There is no chapter with id {request.id}");
             }
-            await _chapterService.RemoveAsync(chapter);
+            _chapterService.Remove(chapter);
         }
     }
 }

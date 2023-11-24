@@ -18,10 +18,9 @@ namespace Manga.Infrastructure.Repositories
             return await _dbContext.MangaPages.Where(mp => mp.MangaChapter == mangaChapter).ToListAsync();
         }
 
-        public async Task UpdateAsync(MangaPage mangaPage)
+        public void Update(MangaPage mangaPage)
         {
             _dbContext.MangaPages.Update(mangaPage);
-            await SaveAsync();
         }
     }
 }

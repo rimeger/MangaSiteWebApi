@@ -62,7 +62,7 @@ namespace Manga.UnitTests.Application.ServicesTests
             result.Should().BeEquivalentTo(expectedChapter);
         }
         [Fact]
-        public async void RemoveAsync_Should_CallRemoveOnce()
+        public void RemoveAsync_Should_CallRemoveOnce()
         {
             //Arrange
             var chapter = new MangaChapter
@@ -72,13 +72,13 @@ namespace Manga.UnitTests.Application.ServicesTests
             };
 
             //Act
-            await _chapterService.RemoveAsync(chapter);
+            _chapterService.Remove(chapter);
 
             //Assert
-            await _chapterRepositoryMock.Received(1).RemoveAsync(chapter);
+            _chapterRepositoryMock.Received(1).Remove(chapter);
         }
         [Fact]
-        public async void Untrack_Should_CallUntrackOnce()
+        public void Untrack_Should_CallUntrackOnce()
         {
             //Arrange
             var chapter = new MangaChapter
@@ -88,13 +88,13 @@ namespace Manga.UnitTests.Application.ServicesTests
             };
 
             //Act
-            await _chapterService.Untrack(chapter);
+            _chapterService.Untrack(chapter);
 
             //Assert
-            await _chapterRepositoryMock.Received(1).Untrack(chapter);
+            _chapterRepositoryMock.Received(1).Untrack(chapter);
         }
         [Fact]
-        public async void UpdateAsync_Should_CallUpdateOnce()
+        public void UpdateAsync_Should_CallUpdateOnce()
         {
             //Arrange
             var chapter = new MangaChapter
@@ -104,10 +104,10 @@ namespace Manga.UnitTests.Application.ServicesTests
             };
 
             //Act
-            await _chapterService.UpdateAsync(chapter);
+            _chapterService.Update(chapter);
 
             //Assert
-            await _chapterRepositoryMock.Received(1).UpdateAsync(chapter);
+            _chapterRepositoryMock.Received(1).Update(chapter);
         }
         [Fact]
         public async void CreateAsync_Should_CallCreateOnce()

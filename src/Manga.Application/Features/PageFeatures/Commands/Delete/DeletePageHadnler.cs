@@ -20,7 +20,7 @@ namespace Manga.Application.Features.PageFeatures.Commands.Delete
             {
                 throw new NotFoundException($"There is no page with id {request.id}");
             }
-            await _pageService.RemoveAsync(page);
+            _pageService.Remove(page);
         }
     }
 }

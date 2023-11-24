@@ -37,11 +37,11 @@ namespace Manga.Application.Features.TitleFeatures.Commands.Update
                 throw new NotFoundException($"There is no title with id {request.Id}");
             }
 
-            await _titleService.Untrack(originalTitle);
+            _titleService.Untrack(originalTitle);
             var updatedTitle = _mapper.Map<MangaTitle>(request);
             updatedTitle.CreatedDate = originalTitle.CreatedDate;
             updatedTitle.UpdatedDate = DateTime.Now;
-            await _titleService.UpdateAsync(updatedTitle);
+            _titleService.Update(updatedTitle);
         }
     }
 }
