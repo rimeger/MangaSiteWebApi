@@ -13,7 +13,7 @@ namespace Manga.Infrastructure
         {
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnectionString"), b => b.MigrationsAssembly("Manga.WebAPI"));
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnectionString"), b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName));
             });
             services.AddScoped<IMangaChapterRepository, MangaChapterRepository>();
             services.AddScoped<IMangaPageRepository, MangaPageRepository>();
