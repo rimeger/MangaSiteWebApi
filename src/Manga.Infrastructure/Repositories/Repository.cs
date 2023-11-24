@@ -41,9 +41,10 @@ namespace Manga.Infrastructure.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task Untrack(T entity)
+        public Task Untrack(T entity)
         {
             _dbContext.Entry(entity).State = EntityState.Detached;
+            return Task.CompletedTask;
         }
     }
 }
