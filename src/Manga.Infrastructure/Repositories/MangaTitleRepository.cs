@@ -16,6 +16,7 @@ namespace Manga.Infrastructure.Repositories
         public void Update(MangaTitle entity)
         {
             _dbContext.MangaTitles.Update(entity);
+            _dbContext.SaveChanges();
         }
     }
 }

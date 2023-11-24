@@ -21,6 +21,7 @@ namespace Manga.Infrastructure.Repositories
         public void Update(MangaPage mangaPage)
         {
             _dbContext.MangaPages.Update(mangaPage);
+            _dbContext.SaveChanges();
         }
     }
 }

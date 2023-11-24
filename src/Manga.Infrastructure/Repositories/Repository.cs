@@ -17,6 +17,7 @@ namespace Manga.Infrastructure.Repositories
         public async Task CreateAsync(T entity)
         {
             await _dbSet.AddAsync(entity);
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task<List<T>> GetAllAsync()
@@ -32,6 +33,7 @@ namespace Manga.Infrastructure.Repositories
         public void Remove(T entity)
         {
             _dbSet.Remove(entity);
+            _dbContext.SaveChanges();
         }
 
         public void Untrack(T entity)
