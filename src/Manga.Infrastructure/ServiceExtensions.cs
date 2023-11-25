@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Manga.Application.Repositories;
 using Manga.Infrastructure.Repositories;
+using Manga.Application.Abstractions;
+using Manga.Infrastructure.Authentication;
 
 namespace Manga.Infrastructure
 {
@@ -18,6 +20,8 @@ namespace Manga.Infrastructure
             services.AddScoped<IMangaChapterRepository, MangaChapterRepository>();
             services.AddScoped<IMangaPageRepository, MangaPageRepository>();
             services.AddScoped<IMangaTitleRepository, MangaTitleRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IJwtProvider, JwtProvider>();
         }
     }
 }
