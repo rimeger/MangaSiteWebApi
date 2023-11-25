@@ -24,6 +24,7 @@ namespace Manga.Application
             services.AddScoped<IMangaTitleService, MangaTitleService>();
             services.AddScoped<IMangaChapterService, MangaChapterService>();
             services.AddScoped<IMangaPageService, MangaPageService>();
+            services.AddScoped<IUserService, UserService>();
         }
     }
 }
