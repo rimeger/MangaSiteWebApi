@@ -6,10 +6,11 @@
   * [Built With](#built-with)
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
+  * [Admin Credentials](#admin-credentials)
 
 ## About the project
 
-Web api built using ASP.NET Core Web api 
+Web api built using ASP.NET Core Web api, having JWT authentication and role based access control with static separation of roles(user can be logged in only with one role at a time). 
 Back-end was created using clean architecture and unit tests.
 
 In this web api, user can read, create, update and delete:
@@ -45,4 +46,14 @@ See: [https://code.visualstudio.com/docs/languages/csharp](https://code.visualst
 ```
 cd src/Manga.WebAPI
 dotnet run
+```
+
+### Admin Credentials
+username:
+```
+admin
+```
+password:
+```
+!@#$%^&*(admin)1128
 ```
