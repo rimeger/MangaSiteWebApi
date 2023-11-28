@@ -3,6 +3,7 @@
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
 WORKDIR /app
 EXPOSE 80
+EXPOSE 443
 
 ENV ASPNETCORE_ENVIRONMENT=Development
 
@@ -15,10 +16,10 @@ COPY ["src/Manga.Domain/Manga.Domain.csproj", "src/Manga.Domain/"]
 RUN dotnet restore "./src/Manga.WebAPI/./Manga.WebAPI.csproj"
 COPY . .
 WORKDIR "/src/src/Manga.WebAPI"
-RUN dotnet build "./Manga.WebAPI.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "./Manga.WebAPI.csproj" -c Debug -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "./Manga.WebAPI.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./Manga.WebAPI.csproj" -c Debug -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app

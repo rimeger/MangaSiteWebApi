@@ -14,8 +14,14 @@ services:
   SqlServerDb:
     container_name: SqlServerContainer
     image: mcr.microsoft.com/mssql/server:2022-latest
+    user: root
     ports:
-        - 8002:1433
+      - "8002:1433"
     environment:
-        - ACCEPT_EULA=Y
-        - MSSQL_SA_PASSWORD=Admin123 
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Admin123 
+    volumes:
+      - ./sql_data:/var/opt/mssql
+
+volumes:
+  sql_data:
