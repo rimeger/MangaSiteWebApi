@@ -1,5 +1,7 @@
 ﻿using Manga.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Manga.Infrastructure.DataContext
 {
@@ -7,6 +9,19 @@ namespace Manga.Infrastructure.DataContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
+            var dbCreater = Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator;
+            if (dbCreater != null)
+            {
+                if (!dbCreater.CanConnect())
+                {
+                    dbCreater.Create();
+                }
+
+                if (!dbCreater.HasTables())
+                {
+                    dbCreater.CreateTables();
+                }
+            }
         }
 
         public DbSet<MangaTitle> MangaTitles { get; set; }

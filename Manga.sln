@@ -13,9 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Manga.Infrastructure", "src
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Manga.WebAPI", "src\Manga.WebAPI\Manga.WebAPI.csproj", "{A6C30BAE-7422-4B68-BBC4-16D35CDA9910}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Manga.UnitTests", "tests\Manga.UnitTests\Manga.UnitTests.csproj", "{921B2D84-892D-4594-99F4-5B07E5C3A145}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Manga.UnitTests", "tests\Manga.UnitTests\Manga.UnitTests.csproj", "{921B2D84-892D-4594-99F4-5B07E5C3A145}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1B12BA02-2E38-4C22-8613-65FC9F1B5FDA}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{647298D1-FCA6-4A9E-A461-13276DC2B2D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{921B2D84-892D-4594-99F4-5B07E5C3A145}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{921B2D84-892D-4594-99F4-5B07E5C3A145}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{921B2D84-892D-4594-99F4-5B07E5C3A145}.Release|Any CPU.Build.0 = Release|Any CPU
+		{647298D1-FCA6-4A9E-A461-13276DC2B2D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{647298D1-FCA6-4A9E-A461-13276DC2B2D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{647298D1-FCA6-4A9E-A461-13276DC2B2D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{647298D1-FCA6-4A9E-A461-13276DC2B2D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
