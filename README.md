@@ -40,12 +40,10 @@ git clone https://github.com/rimeger/MangaSiteWebApi
 ```
 #### Visual Studio or Rider
 Open .sln file and run/debug project
-#### Visual Studio Code
-See: [https://code.visualstudio.com/docs/languages/csharp](https://code.visualstudio.com/docs/languages/csharp)
-#### CLI
+#### Docker
 ```
-cd src/Manga.WebAPI
-dotnet run
+cd MangaSiteWebApi
+docker-compose up -d
 ```
 
 ### Admin Credentials
