@@ -26,7 +26,7 @@ namespace Manga.Application.Features.UserFeatures.Login
             }
             if(!user.Password.Equals(request.password))
             {
-                throw new InvalidCredentials($"Wrong password");
+                throw new InvalidCredentials($"Bad credentials");
             }
 
             string token = _jwtProvider.Generate(user);
