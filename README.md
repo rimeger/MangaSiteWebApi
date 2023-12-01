@@ -1,4 +1,4 @@
-# Web api for Manga 
+# Web api for manga website 
 
 ## Table of Contents
 
