@@ -11,5 +11,6 @@ namespace Manga.Application.Services.Interfaces
         void Remove(MangaChapter entity);
         void Untrack(MangaChapter entity);
         Task<List<MangaChapter>> GetAllByTitleAsync(MangaTitle mangaTitle);
+        Task LikeChapter(User user, MangaChapter entity);
     }
 }

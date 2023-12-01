@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Manga.Application.Features.UserFeatures.Register
+namespace Manga.Application.Features.UserFeatures.Commands.Register
 {
     public class RegisterMapper : Profile
     {

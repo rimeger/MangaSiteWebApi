@@ -3,12 +3,15 @@ using Manga.Application.Dto;
 using Manga.Application.Exceptions;
 using Manga.Application.Features.ChapterFeatures.Commands.Create;
 using Manga.Application.Features.ChapterFeatures.Commands.Delete;
+using Manga.Application.Features.ChapterFeatures.Commands.Like;
 using Manga.Application.Features.ChapterFeatures.Commands.Update;
 using Manga.Application.Features.ChapterFeatures.Queries.GetAll;
 using Manga.Application.Features.ChapterFeatures.Queries.GetAllByTitle;
 using Manga.Application.Features.ChapterFeatures.Queries.GetById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Manga.WebAPI.Controllers
 {
@@ -119,6 +122,16 @@ namespace Manga.WebAPI.Controllers
                 return NotFound(ex.Message);
             }
             return Ok(chapters);
+        }
+
+        [HttpPost("like")]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<ActionResult> LikeChapter(Guid id)
+        {
+            var username = User.FindFirstValue(ClaimTypes.Name);
+            await _mediator.Send(new LikeChapterCommand(id, username));
+            return NoContent();
         }
     }
 }

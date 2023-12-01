@@ -18,6 +18,12 @@ namespace Manga.Infrastructure.Repositories
             return await _dbContext.MangaChapters.Where(mc => mc.MangaTitle == mangaTitle).ToListAsync();
         }
 
+        public async Task LikeChapter(UserChapter likedChapter)
+        {
+            await _dbContext.UserChapters.AddAsync(likedChapter);
+            await _dbContext.SaveChangesAsync();
+        }
+
         public void Update(MangaChapter entity)
         {
             _dbContext.MangaChapters.Update(entity);

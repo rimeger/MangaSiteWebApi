@@ -32,6 +32,18 @@ namespace Manga.Application.Services
             return await _chapterRepository.GetByIdAsync(id);
         }
 
+        public async Task LikeChapter(User user, MangaChapter entity)
+        {
+            UserChapter likedChapter = new UserChapter
+            {
+                User = user,
+                UserId = user.Id,
+                MangaChapter = entity,
+                ChapterId = entity.Id
+            };
+            await _chapterRepository.LikeChapter(likedChapter);
+        }
+
         public void Remove(MangaChapter entity)
         {
             _chapterRepository.Remove(entity);
