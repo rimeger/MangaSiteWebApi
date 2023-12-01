@@ -25,14 +25,16 @@ namespace Manga.Application.Features.UserFeatures.Register
         private readonly IValidator<RegisterCommand> _validator;
         private readonly IMapper _mapper;
         private readonly IJwtProvider _jwtProvider;
+        private readonly IPasswordHasher _passwordHasher;
 
         public RegisterHandler(IUserService userService, IValidator<RegisterCommand> validator,
-            IMapper mapper, IJwtProvider jwtProvider)
+            IMapper mapper, IJwtProvider jwtProvider, IPasswordHasher passwordHasher)
         {
             _userService = userService;
             _validator = validator;
             _mapper = mapper;
             _jwtProvider = jwtProvider;
+            _passwordHasher = passwordHasher;
         }
         public async Task<string> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
@@ -45,6 +47,7 @@ namespace Manga.Application.Features.UserFeatures.Register
             }
 
             var user = _mapper.Map<User>(request);
+            user.Password = _passwordHasher.Hash(request.Password);
             user.Id = Guid.NewGuid();
             user.CreatedDate = DateTime.Now;
             user.UpdatedDate = DateTime.Now;

@@ -22,6 +22,7 @@ namespace Manga.Infrastructure
             services.AddScoped<IMangaTitleRepository, MangaTitleRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IJwtProvider, JwtProvider>();
+            services.AddScoped<IPasswordHasher, PasswordHasher>();
         }
     }
 }

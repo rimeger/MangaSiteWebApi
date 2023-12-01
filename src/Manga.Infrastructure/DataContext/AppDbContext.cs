@@ -1,4 +1,6 @@
-﻿using Manga.Domain.Entities;
+﻿using Manga.Application.Abstractions;
+using Manga.Domain.Entities;
+using Manga.Infrastructure.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -7,7 +9,7 @@ namespace Manga.Infrastructure.DataContext
 {
     public class AppDbContext : DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        public AppDbContext(DbContextOptions<AppDbContext> options, IPasswordHasher passwordHasher) : base(options)
         {
             var dbCreater = Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator;
             if (dbCreater != null)
@@ -57,7 +59,7 @@ namespace Manga.Infrastructure.DataContext
                     UpdatedDate = DateTime.Now,
                     UserName = "admin",
                     Email = "admin@admin.com",
-                    Password = "!@#$%^&*(admin)1128",
+                    Password = new PasswordHasher().Hash("!@#$%^&*(admin)1128"),
                     Role = "Admin"
                 }
                 );

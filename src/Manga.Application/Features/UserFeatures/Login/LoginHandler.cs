@@ -10,11 +10,14 @@ namespace Manga.Application.Features.UserFeatures.Login
     {
         private readonly IUserService _userService;
         private readonly IJwtProvider _jwtProvider;
+        private readonly IPasswordHasher _passwordHasher;
 
-        public LoginHandler(IUserService userService, IJwtProvider jwtProvider)
+        public LoginHandler(IUserService userService, IJwtProvider jwtProvider, 
+            IPasswordHasher passwordHasher)
         {
             _userService = userService;
             _jwtProvider = jwtProvider;
+            _passwordHasher = passwordHasher;
         }
 
         async Task<string> IRequestHandler<LoginCommand, string>.Handle(LoginCommand request, CancellationToken cancellationToken)
@@ -24,7 +27,7 @@ namespace Manga.Application.Features.UserFeatures.Login
             {
                 throw new InvalidCredentials($"There is no user with {request.username} username");
             }
-            if(!user.Password.Equals(request.password))
+            if(!_passwordHasher.Verify(request.password, user.Password))
             {
                 throw new InvalidCredentials($"Bad credentials");
             }
