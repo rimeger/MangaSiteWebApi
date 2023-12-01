@@ -11,5 +11,6 @@ namespace Manga.Application.Repositories
     {
         Task<User> GetByUserName(string username);
         void Update(User entity);
+        Task<List<MangaChapter>> GetLikedChaptersAsync(Guid userId);
     }
 }

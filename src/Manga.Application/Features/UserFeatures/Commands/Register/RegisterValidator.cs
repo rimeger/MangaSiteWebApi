@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Manga.Application.Features.UserFeatures.Register
+namespace Manga.Application.Features.UserFeatures.Commands.Register
 {
     public class RegisterValidator : AbstractValidator<RegisterCommand>
     {

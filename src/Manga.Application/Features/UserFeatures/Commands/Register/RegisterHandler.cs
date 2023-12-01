@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Manga.Application.Features.UserFeatures.Register
+namespace Manga.Application.Features.UserFeatures.Commands.Register
 {
     public record RegisterCommand : IRequest<string>
     {
@@ -41,7 +41,7 @@ namespace Manga.Application.Features.UserFeatures.Register
             await _validator.ValidateAndThrowAsync(request);
 
             var existingUser = await _userService.GetByUserName(request.UserName);
-            if(existingUser != null)
+            if (existingUser != null)
             {
                 throw new InvalidCredentials($"Username is already taken");
             }

@@ -6,5 +6,6 @@ namespace Manga.Application.Repositories
     {
         void Update(MangaChapter entity);
         Task<List<MangaChapter>> GetAllByTitleAsync(MangaTitle mangaTitle);
+        Task LikeChapter(UserChapter likedChapter);
     }
 }

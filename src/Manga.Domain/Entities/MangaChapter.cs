@@ -8,5 +8,6 @@ namespace Manga.Domain.Entities
         public int ChapterNumber { get; set; }
         public MangaTitle MangaTitle { get; set; } = null!;
         public ICollection<MangaPage> Pages { get; set; } = new List<MangaPage>();
+        public ICollection<UserChapter> UserChapters { get; set; } = new List<UserChapter>();
     }
 }

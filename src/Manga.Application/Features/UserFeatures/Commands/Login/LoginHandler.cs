@@ -3,7 +3,7 @@ using Manga.Application.Exceptions;
 using Manga.Application.Services.Interfaces;
 using MediatR;
 
-namespace Manga.Application.Features.UserFeatures.Login
+namespace Manga.Application.Features.UserFeatures.Commands.Login
 {
     public record LoginCommand(string username, string password) : IRequest<string> { }
     public class LoginHandler : IRequestHandler<LoginCommand, string>
@@ -12,7 +12,7 @@ namespace Manga.Application.Features.UserFeatures.Login
         private readonly IJwtProvider _jwtProvider;
         private readonly IPasswordHasher _passwordHasher;
 
-        public LoginHandler(IUserService userService, IJwtProvider jwtProvider, 
+        public LoginHandler(IUserService userService, IJwtProvider jwtProvider,
             IPasswordHasher passwordHasher)
         {
             _userService = userService;
@@ -23,11 +23,11 @@ namespace Manga.Application.Features.UserFeatures.Login
         async Task<string> IRequestHandler<LoginCommand, string>.Handle(LoginCommand request, CancellationToken cancellationToken)
         {
             var user = await _userService.GetByUserName(request.username);
-            if(user is null)
+            if (user is null)
             {
                 throw new InvalidCredentials($"There is no user with {request.username} username");
             }
-            if(!_passwordHasher.Verify(request.password, user.Password))
+            if (!_passwordHasher.Verify(request.password, user.Password))
             {
                 throw new InvalidCredentials($"Bad credentials");
             }
