@@ -1,4 +1,5 @@
-﻿using Manga.Application.Repositories;
+﻿using Manga.Application.Exceptions;
+using Manga.Application.Repositories;
 using Manga.Application.Services.Interfaces;
 using Manga.Domain.Entities;
 using MediatR;
@@ -25,7 +26,19 @@ namespace Manga.Application.Features.ChapterFeatures.Commands.Like
         {
             User current = await _userService.GetByUserName(request.username);
             MangaChapter chapter = await _chapterService.GetByIdAsync(request.chapterId);
+            if(chapter is null)
+            {
+                throw new NotFoundException($"There is no chapter with id {request.chapterId}");
+            }
+
+            var chapters = await _userService.GetLikedChaptersAsync(current.Id);
+            if (chapters.Contains(chapter))
+            {
+                throw new AlreadyDoneException("Can't like same chapter twice");
+            }
+
             chapter.Likes++;
+            
             await _chapterService.LikeChapter(current, chapter);
 
         }

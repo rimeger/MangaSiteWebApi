@@ -130,7 +130,18 @@ namespace Manga.WebAPI.Controllers
         public async Task<ActionResult> LikeChapter(Guid id)
         {
             var username = User.FindFirstValue(ClaimTypes.Name);
-            await _mediator.Send(new LikeChapterCommand(id, username));
+            try
+            {
+                await _mediator.Send(new LikeChapterCommand(id, username));
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (AlreadyDoneException ex)
+            {
+                return BadRequest(ex.Message);
+            }
             return NoContent();
         }
     }
