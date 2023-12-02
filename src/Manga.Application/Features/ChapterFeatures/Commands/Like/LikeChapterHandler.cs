@@ -25,7 +25,8 @@ namespace Manga.Application.Features.ChapterFeatures.Commands.Like
         {
             User current = await _userService.GetByUserName(request.username);
             MangaChapter chapter = await _chapterService.GetByIdAsync(request.chapterId);
-            _chapterService.LikeChapter(current, chapter);
+            chapter.Likes++;
+            await _chapterService.LikeChapter(current, chapter);
 
         }
     }
