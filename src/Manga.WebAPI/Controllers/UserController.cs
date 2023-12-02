@@ -3,6 +3,7 @@ using Manga.Application.Exceptions;
 using Manga.Application.Features.ChapterFeatures.Queries.GetAll;
 using Manga.Application.Features.UserFeatures.Commands.Login;
 using Manga.Application.Features.UserFeatures.Commands.Register;
+using Manga.Application.Features.UserFeatures.Queries.GetBookmarks;
 using Manga.Application.Features.UserFeatures.Queries.GetLikedChapters;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -57,12 +58,20 @@ namespace Manga.WebAPI.Controllers
             return Ok(token);
         }
 
-        [HttpGet("liked/chapters")]
+        [HttpGet("liked")]
         [Authorize]
         public async Task<ActionResult> LikedChapters()
         {
             var username = User.FindFirstValue(ClaimTypes.Name);
             return Ok(await _mediator.Send(new GetLikedChaptersRequest(username)));
+        }
+
+        [HttpGet("bookmarks")]
+        [Authorize]
+        public async Task<ActionResult> Bookmarks()
+        {
+            var username = User.FindFirstValue(ClaimTypes.Name);
+            return Ok(await _mediator.Send(new GetBookmarksRequest(username)));
         }
     }
 }

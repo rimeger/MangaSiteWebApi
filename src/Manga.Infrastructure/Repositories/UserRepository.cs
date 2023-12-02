@@ -19,6 +19,14 @@ namespace Manga.Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
+        public async Task<List<MangaTitle>> GetBookmarksAsync(Guid userId)
+        {
+            return await _dbContext.UserTitles
+                .Where(ut => ut.UserId == userId)
+                .Select(ut => ut.MangaTitle)
+                .ToListAsync();
+        }
+
         public async Task<User> GetByUserName(string username)
         {
             return await _dbContext.Users.FirstOrDefaultAsync(u => u.UserName.Equals(username));

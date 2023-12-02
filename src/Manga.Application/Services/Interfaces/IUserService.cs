@@ -15,5 +15,6 @@ namespace Manga.Application.Services.Interfaces
         void Remove(User entity);
         void Untrack(User entity);
         Task<List<MangaChapter>> GetLikedChaptersAsync(Guid userId);
+        Task<List<MangaTitle>> GetBookmarksAsync(Guid userId);
     }
 }

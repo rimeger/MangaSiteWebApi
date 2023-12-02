@@ -1,10 +1,10 @@
 ﻿namespace Manga.Domain.Entities
 {
-    public class UserChapter
+    public class UserTitle
     {
-        public Guid ChapterId { get; set; }
+        public Guid TitleId { get; set; }
         public Guid UserId { get; set; }
-        public MangaChapter MangaChapter { get; set; } = null!;
+        public MangaTitle MangaTitle { get; set; } = null!;
         public User User { get; set; } = null!;
     }
 }

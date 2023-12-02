@@ -31,6 +31,7 @@ namespace Manga.Infrastructure.DataContext
         public DbSet<MangaPage> MangaPages { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserChapter> UserChapters { get; set; }
+        public DbSet<UserTitle> UserTitles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -68,11 +69,22 @@ namespace Manga.Infrastructure.DataContext
                 .HasKey(uc => new { uc.ChapterId, uc.UserId });
             modelBuilder.Entity<UserChapter>()
                 .HasOne(mc => mc.MangaChapter)
-                .WithMany(u => u.UserChapters)
+                .WithMany(uc => uc.UserChapters)
                 .HasForeignKey(mc => mc.ChapterId);
             modelBuilder.Entity<UserChapter>()
                 .HasOne(u => u.User)
                 .WithMany(uc => uc.UserChapters)
+                .HasForeignKey(u => u.UserId);
+
+            modelBuilder.Entity<UserTitle>()
+                .HasKey(ut => new { ut.TitleId, ut.UserId });
+            modelBuilder.Entity<UserTitle>()
+                .HasOne(mt => mt.MangaTitle)
+                .WithMany(ut => ut.UserTitles)
+                .HasForeignKey(mt => mt.TitleId);
+            modelBuilder.Entity<UserTitle>()
+                .HasOne(u => u.User)
+                .WithMany(ut => ut.UserTitles)
                 .HasForeignKey(u => u.UserId);
         }
     }

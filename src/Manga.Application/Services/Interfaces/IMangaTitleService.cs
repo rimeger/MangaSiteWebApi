@@ -10,5 +10,6 @@ namespace Manga.Application.Services.Interfaces
         void Update(MangaTitle entity);
         void Remove(MangaTitle entity);
         void Untrack(MangaTitle entity);
+        Task BookmarkTitle(User user, MangaTitle entity);
     }
 }
