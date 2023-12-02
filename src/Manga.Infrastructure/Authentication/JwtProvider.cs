@@ -20,8 +20,8 @@ namespace Manga.Infrastructure.Authentication
         {
             var claims = new Claim[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.UserName.ToString()),
-                new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                new Claim(ClaimTypes.Name, user.UserName.ToString()),
+                new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Role, user.Role)
             };
 

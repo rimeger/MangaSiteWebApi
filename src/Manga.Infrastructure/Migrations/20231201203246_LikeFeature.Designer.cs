@@ -4,6 +4,7 @@ using Manga.Infrastructure.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Manga.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231201203246_LikeFeature")]
+    partial class LikeFeature
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,9 +40,6 @@ namespace Manga.Infrastructure.Migrations
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("Likes")
-                        .HasColumnType("int");
 
                     b.Property<Guid>("MangaTitleId")
                         .HasColumnType("uniqueidentifier");
@@ -152,11 +152,11 @@ namespace Manga.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("5a2c4e8b-9d1f-4a7b-a0c8-8d9b6f2e3a14"),
-                            CreatedDate = new DateTime(2023, 12, 2, 22, 22, 47, 118, DateTimeKind.Local).AddTicks(9536),
+                            CreatedDate = new DateTime(2023, 12, 1, 21, 32, 46, 582, DateTimeKind.Local).AddTicks(343),
                             Email = "admin@admin.com",
-                            Password = "$2a$11$VllnSjP6X6MGqMxfnO2QSu/Rb9xSpDFZ6ZkjMxZ2CH8xOUMqgUuvC",
+                            Password = "$2a$11$mawYOygVnqZ.lWJupc0yG.3O8BxOsp188BGb57xbQh7ZYcCL/OBwq",
                             Role = "Admin",
-                            UpdatedDate = new DateTime(2023, 12, 2, 22, 22, 47, 118, DateTimeKind.Local).AddTicks(9601),
+                            UpdatedDate = new DateTime(2023, 12, 1, 21, 32, 46, 582, DateTimeKind.Local).AddTicks(405),
                             UserName = "admin"
                         });
                 });

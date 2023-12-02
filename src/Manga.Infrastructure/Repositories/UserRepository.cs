@@ -24,6 +24,14 @@ namespace Manga.Infrastructure.Repositories
             return await _dbContext.Users.FirstOrDefaultAsync(u => u.UserName.Equals(username));
         }
 
+        public async Task<List<MangaChapter>> GetLikedChaptersAsync(Guid userId)
+        {
+            return await _dbContext.UserChapters
+                .Where(uc => uc.UserId == userId)
+                .Select(uc => uc.MangaChapter)
+                .ToListAsync();    
+        }
+
         public void Update(User entity)
         {
             _dbContext.Users.Update(entity);

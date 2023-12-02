@@ -1,9 +1,14 @@
 ﻿using FluentValidation;
 using Manga.Application.Exceptions;
-using Manga.Application.Features.UserFeatures.Login;
-using Manga.Application.Features.UserFeatures.Register;
+using Manga.Application.Features.ChapterFeatures.Queries.GetAll;
+using Manga.Application.Features.UserFeatures.Commands.Login;
+using Manga.Application.Features.UserFeatures.Commands.Register;
+using Manga.Application.Features.UserFeatures.Queries.GetLikedChapters;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace Manga.WebAPI.Controllers
 {
@@ -50,6 +55,14 @@ namespace Manga.WebAPI.Controllers
                 return BadRequest(ex.Message);
             }
             return Ok(token);
+        }
+
+        [HttpGet("liked/chapters")]
+        [Authorize]
+        public async Task<ActionResult> LikedChapters()
+        {
+            var username = User.FindFirstValue(ClaimTypes.Name);
+            return Ok(await _mediator.Send(new GetLikedChaptersRequest(username)));
         }
     }
 }

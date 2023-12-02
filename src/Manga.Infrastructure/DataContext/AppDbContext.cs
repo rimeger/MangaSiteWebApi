@@ -30,6 +30,7 @@ namespace Manga.Infrastructure.DataContext
         public DbSet<MangaChapter> MangaChapters { get; set; }
         public DbSet<MangaPage> MangaPages { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<UserChapter> UserChapters { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -63,6 +64,16 @@ namespace Manga.Infrastructure.DataContext
                     Role = "Admin"
                 }
                 );
+            modelBuilder.Entity<UserChapter>()
+                .HasKey(uc => new { uc.ChapterId, uc.UserId });
+            modelBuilder.Entity<UserChapter>()
+                .HasOne(mc => mc.MangaChapter)
+                .WithMany(u => u.UserChapters)
+                .HasForeignKey(mc => mc.ChapterId);
+            modelBuilder.Entity<UserChapter>()
+                .HasOne(u => u.User)
+                .WithMany(uc => uc.UserChapters)
+                .HasForeignKey(u => u.UserId);
         }
     }
 }

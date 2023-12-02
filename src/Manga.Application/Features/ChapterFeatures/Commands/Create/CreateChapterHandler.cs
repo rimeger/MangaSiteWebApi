@@ -10,8 +10,7 @@ namespace Manga.Application.Features.ChapterFeatures.Commands.Create
 {
     public record CreateChapterCommand : IRequest<MangaChapterDto>
     {
-        public string ChapterName { get; set; }
-        public int ChapterNumber { get; set; }
+        public string ChapterName { get; set; } = string.Empty;
         public Guid MangaTitleId { get; set; }
     }
 
@@ -39,9 +38,10 @@ namespace Manga.Application.Features.ChapterFeatures.Commands.Create
             {
                 throw new NotFoundException($"There is no title with id {request.MangaTitleId}");
             }
-
+            var chapters = await _chapterService.GetAllByTitleAsync(title);
             var chapter = _mapper.Map<MangaChapter>(request);
             chapter.Id = Guid.NewGuid();
+            chapter.ChapterNumber = chapters.Count + 1;
             chapter.CreatedDate = DateTime.Now;
             chapter.UpdatedDate = DateTime.Now;
             chapter.MangaTitle = title;
