@@ -10,8 +10,7 @@ namespace Manga.Application.Features.PageFeatures.Commands.Create
 {
     public record CreatePageCommand : IRequest<MangaPageDto>
     {
-        public int PageNumber { get; set; }
-        public string ImageUrl { get; set; }
+        public string ImageUrl { get; set; } = String.Empty;
         public Guid ChapterId { get; set; }
     }
     public class CreatePageHandler : IRequestHandler<CreatePageCommand, MangaPageDto>
@@ -37,9 +36,11 @@ namespace Manga.Application.Features.PageFeatures.Commands.Create
             if(chapter is null)
             {
                 throw new NotFoundException($"There is no chapter with id {request.ChapterId}");
-            }            
+            }
+            var pages = await _pageService.GetAllByChapterAsync(chapter);
             var page = _mapper.Map<MangaPage>(request);
             page.Id = Guid.NewGuid();
+            page.PageNumber = pages.Count + 1;
             page.CreatedDate = DateTime.Now;
             page.UpdatedDate = DateTime.Now;
             page.MangaChapter = chapter;
