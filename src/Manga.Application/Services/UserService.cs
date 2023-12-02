@@ -22,6 +22,11 @@ namespace Manga.Application.Services
              await _userRepository.CreateAsync(entity);
         }
 
+        public async Task<List<MangaTitle>> GetBookmarksAsync(Guid userId)
+        {
+            return await _userRepository.GetBookmarksAsync(userId); ;
+        }
+
         public async Task<User> GetByUserName(string username)
         {
            return await _userRepository.GetByUserName(username);

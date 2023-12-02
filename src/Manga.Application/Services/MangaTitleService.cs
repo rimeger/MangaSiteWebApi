@@ -12,6 +12,19 @@ namespace Manga.Application.Services
         {
             _titleRepository = titleRepository;
         }
+
+        public async Task BookmarkTitle(User user, MangaTitle entity)
+        {
+            UserTitle bookmark = new UserTitle
+            {
+                User = user,
+                UserId = user.Id,
+                MangaTitle = entity,
+                TitleId = entity.Id
+            };
+            await _titleRepository.BookmarkTitle(bookmark);
+        }
+
         public async Task CreateAsync(MangaTitle entity)
         {
             await _titleRepository.CreateAsync(entity);

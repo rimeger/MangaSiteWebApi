@@ -13,6 +13,12 @@ namespace Manga.Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
+        public async Task BookmarkTitle(UserTitle entity)
+        {
+            await _dbContext.UserTitles.AddAsync(entity);
+            await _dbContext.SaveChangesAsync();
+        }
+
         public void Update(MangaTitle entity)
         {
             _dbContext.MangaTitles.Update(entity);

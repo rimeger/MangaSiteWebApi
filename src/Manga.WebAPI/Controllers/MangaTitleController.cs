@@ -1,13 +1,17 @@
 ﻿using FluentValidation;
 using Manga.Application.Dto;
 using Manga.Application.Exceptions;
+using Manga.Application.Features.ChapterFeatures.Commands.Like;
+using Manga.Application.Features.TitleFeatures.Commands.Bookmark;
 using Manga.Application.Features.TitleFeatures.Commands.Create;
 using Manga.Application.Features.TitleFeatures.Commands.Delete;
 using Manga.Application.Features.TitleFeatures.Commands.Update;
 using Manga.Application.Features.TitleFeatures.Queries.GetAll;
 using Manga.Application.Features.TitleFeatures.Queries.GetById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Manga.WebAPI.Controllers
 {
@@ -96,6 +100,27 @@ namespace Manga.WebAPI.Controllers
             catch(NotFoundException ex)
             {
                 return NotFound(ex.Message);
+            }
+            return NoContent();
+        }
+
+        [HttpPost("bookmark")]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<ActionResult> BookmarkTitle(Guid id)
+        {
+            var username = User.FindFirstValue(ClaimTypes.Name);
+            try
+            {
+                await _mediator.Send(new BookmarkTitleCommand(id, username));
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (AlreadyDoneException ex)
+            {
+                return BadRequest(ex.Message);
             }
             return NoContent();
         }
