@@ -6,7 +6,7 @@ using Manga.Domain.Entities;
 using NSubstitute;
 using Xunit;
 
-namespace Manga.UnitTests.Application.ServicesTests
+namespace Manga.Application.UnitTests.ServicesTests
 {
     public class MangaTitleServiceTests
     {
@@ -22,14 +22,14 @@ namespace Manga.UnitTests.Application.ServicesTests
         public async void GetAllAsync_Should_ReturnAllTitle()
         {
             //Arrange
-            var expectedList = new List<MangaTitle> { 
+            var expectedList = new List<MangaTitle> {
                 new MangaTitle
                     {
                         TitleName = "Test",
                         Author = "NoName",
                         Description = "Loren ipsum",
                         PosterUrl = "https://example.com"
-                    } 
+                    }
             };
             var result = new List<MangaTitle>();
             _titleRepositoryMock.GetAllAsync().Returns(expectedList);
@@ -136,6 +136,29 @@ namespace Manga.UnitTests.Application.ServicesTests
 
             //Assert
             await _titleRepositoryMock.Received(1).CreateAsync(title);
+        }
+
+        [Fact]
+        public async void BookmarkTitle_Should_CallBookmarkOnce()
+        {
+            //Arrange
+            var title = new MangaTitle
+            {
+                TitleName = "Test",
+                Author = "NoName",
+                Description = "Loren ipsum",
+                PosterUrl = "https://example.com"
+            };
+            var user = new User
+            {
+                UserName = "Test",
+            };
+
+            //Act
+            await _titleService.BookmarkTitle(user, title);
+
+            //Assert
+            await _titleRepositoryMock.Received(1).BookmarkTitle(Arg.Is<UserTitle>(u => u.TitleId == title.Id && u.UserId == user.Id));
         }
     }
 }
