@@ -6,7 +6,7 @@ using Manga.Domain.Entities;
 using NSubstitute;
 using Xunit;
 
-namespace Manga.UnitTests.Application.ServicesTests
+namespace Manga.Application.UnitTests.ServicesTests
 {
     public class MangaPageServiceTests
     {

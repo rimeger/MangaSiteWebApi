@@ -6,7 +6,7 @@ using Manga.Domain.Entities;
 using NSubstitute;
 using Xunit;
 
-namespace Manga.UnitTests.Application.ServicesTests
+namespace Manga.Application.UnitTests.ServicesTests
 {
     public class MangaChapterServiceTests
     {
@@ -22,12 +22,12 @@ namespace Manga.UnitTests.Application.ServicesTests
         public async void GetAllAsync_Should_ReturnAllChapter()
         {
             //Arrange
-            var expectedList = new List<MangaChapter> { 
+            var expectedList = new List<MangaChapter> {
                 new MangaChapter
                     {
                         ChapterName = "Test",
                         ChapterNumber = 1
-                    } 
+                    }
             };
             var result = new List<MangaChapter>();
             _chapterRepositoryMock.GetAllAsync().Returns(expectedList);
@@ -153,6 +153,27 @@ namespace Manga.UnitTests.Application.ServicesTests
             await _chapterRepositoryMock.Received(1).GetAllByTitleAsync(title);
             result.Should().BeOfType<List<MangaChapter>>();
             result.Should().BeEquivalentTo(expectedList);
+        }
+
+        [Fact]
+        public async void LikeChapter_Should_CallLikeOnce()
+        {
+            //Arrange
+            var chapter = new MangaChapter
+            {
+                ChapterName = "Test",
+                ChapterNumber = 1
+            };
+            var user = new User
+            {
+                UserName = "Test",
+            };
+
+            //Act
+            await _chapterService.LikeChapter(user, chapter);
+
+            //Assert
+            await _chapterRepositoryMock.Received(1).LikeChapter(Arg.Is<UserChapter>(u => u.ChapterId == chapter.Id && u.UserId == user.Id));
         }
     }
 }
