@@ -25,6 +25,8 @@ namespace Manga.WebAPI.Controllers
         }
 
         [HttpPost("login")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> Login([FromBody] LoginCommand command)
         {
             string token = string.Empty;
@@ -40,6 +42,8 @@ namespace Manga.WebAPI.Controllers
         }
 
         [HttpPost("register")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> Register([FromBody] RegisterCommand command)
         {
             string token = string.Empty;
@@ -60,6 +64,7 @@ namespace Manga.WebAPI.Controllers
 
         [HttpGet("liked")]
         [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult> LikedChapters()
         {
             var username = User.FindFirstValue(ClaimTypes.Name);
@@ -68,6 +73,7 @@ namespace Manga.WebAPI.Controllers
 
         [HttpGet("bookmarks")]
         [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult> Bookmarks()
         {
             var username = User.FindFirstValue(ClaimTypes.Name);
