@@ -41,7 +41,7 @@ namespace Manga.Application.Features.UserFeatures.Commands.Register
             await _validator.ValidateAndThrowAsync(request);
 
             var existingUser = await _userService.GetByUserName(request.UserName);
-            if (existingUser != null)
+            if (existingUser is not null)
             {
                 throw new InvalidCredentials($"Username is already taken");
             }
