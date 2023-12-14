@@ -18,11 +18,11 @@ namespace Manga.Application.UnitTests.Features.UserFeartures.Queries
     public class GetLikedChaptersHandlerTests
     {
         private readonly IUserService _userServiceMock;
-        private readonly IMapper _mapper;
+        private readonly IMapper _mapperMock;
         public GetLikedChaptersHandlerTests()
         {
             _userServiceMock = Substitute.For<IUserService>();
-            _mapper = Substitute.For<IMapper>();
+            _mapperMock = Substitute.For<IMapper>();
         }
 
         [Fact]
@@ -31,7 +31,7 @@ namespace Manga.Application.UnitTests.Features.UserFeartures.Queries
             //Arrange
             var username = "username";
             var request = new GetLikedChaptersRequest(username);
-            var handler = new GetLikedChaptersHandler(_userServiceMock, _mapper);
+            var handler = new GetLikedChaptersHandler(_userServiceMock, _mapperMock);
             var expectedList = new List<MangaChapterDto> {
                 new MangaChapterDto
                     {
@@ -52,7 +52,7 @@ namespace Manga.Application.UnitTests.Features.UserFeartures.Queries
             };
             _userServiceMock.GetByUserName(username).Returns(user);
             _userServiceMock.GetLikedChaptersAsync(user.Id).Returns(list);
-            _mapper.Map<List<MangaChapterDto>>(Arg.Any<List<MangaChapter>>()).Returns(expectedList);
+            _mapperMock.Map<List<MangaChapterDto>>(Arg.Any<List<MangaChapter>>()).Returns(expectedList);
 
             //Act
             var result = await handler.Handle(request, default);

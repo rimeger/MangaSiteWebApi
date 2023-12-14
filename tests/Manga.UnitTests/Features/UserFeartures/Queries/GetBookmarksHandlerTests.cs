@@ -12,11 +12,11 @@ namespace Manga.Application.UnitTests.Features.UserFeartures.Queries
     public class GetBookmarksHandlerTests
     {
         private readonly IUserService _userServiceMock;
-        private readonly IMapper _mapper;
+        private readonly IMapper _mapperMock;
         public GetBookmarksHandlerTests()
         {
             _userServiceMock = Substitute.For<IUserService>();
-            _mapper = Substitute.For<IMapper>();
+            _mapperMock = Substitute.For<IMapper>();
         }
 
         [Fact]
@@ -25,7 +25,7 @@ namespace Manga.Application.UnitTests.Features.UserFeartures.Queries
             //Arrange
             var username = "username";
             var request = new GetBookmarksRequest(username);
-            var handler = new GetBookmarksHandler(_userServiceMock, _mapper);
+            var handler = new GetBookmarksHandler(_userServiceMock, _mapperMock);
             var expectedList = new List<MangaTitleDto> {
                 new MangaTitleDto
                     {
@@ -50,7 +50,7 @@ namespace Manga.Application.UnitTests.Features.UserFeartures.Queries
             };
             _userServiceMock.GetByUserName(username).Returns(user);
             _userServiceMock.GetBookmarksAsync(user.Id).Returns(list);
-            _mapper.Map<List<MangaTitleDto>>(Arg.Any<List<MangaTitle>>()).Returns(expectedList);
+            _mapperMock.Map<List<MangaTitleDto>>(Arg.Any<List<MangaTitle>>()).Returns(expectedList);
 
             //Act
             var result = await handler.Handle(request, default);

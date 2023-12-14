@@ -18,14 +18,14 @@ namespace Manga.Application.UnitTests.Features.UserFeartures.Commands
     {
         private readonly IUserService _userServiceMock;
         private readonly IValidator<RegisterCommand> _validator;
-        private readonly IMapper _mapper;
+        private readonly IMapper _mapperMock;
         private readonly IJwtProvider _jwtProviderMock;
         private readonly IPasswordHasher _passwordHasherMock;
         public RegisterHandlerTests()
         {
             _userServiceMock = Substitute.For<IUserService>();
             _validator = new RegisterValidator();
-            _mapper = Substitute.For<IMapper>();
+            _mapperMock = Substitute.For<IMapper>();
             _jwtProviderMock = Substitute.For<IJwtProvider>();
             _passwordHasherMock = Substitute.For<IPasswordHasher>();
         }
@@ -36,14 +36,14 @@ namespace Manga.Application.UnitTests.Features.UserFeartures.Commands
             //Arrange
             var username = "username";
             var email = "test@test.com";
-            var password = "password";
+            var password = "password123!";
             var command = new RegisterCommand
             {
                 UserName = username,
                 Email = email,
                 Password = password
             };
-            var handler = new RegisterHandler(_userServiceMock, _validator, _mapper, _jwtProviderMock, _passwordHasherMock);
+            var handler = new RegisterHandler(_userServiceMock, _validator, _mapperMock, _jwtProviderMock, _passwordHasherMock);
             var user = new User
             {
                 UserName = username,
@@ -53,7 +53,7 @@ namespace Manga.Application.UnitTests.Features.UserFeartures.Commands
             string token = "token";
             string hashedPassword = "hash";
             _userServiceMock.GetByUserName(username).ReturnsNull();
-            _mapper.Map<User>(Arg.Any<RegisterCommand>()).Returns(user);
+            _mapperMock.Map<User>(Arg.Any<RegisterCommand>()).Returns(user);
             _passwordHasherMock.Hash(command.Password).Returns(hashedPassword);
             _jwtProviderMock.Generate(user).Returns(token);
 
@@ -83,7 +83,7 @@ namespace Manga.Application.UnitTests.Features.UserFeartures.Commands
                 Email = email,
                 Password = password
             };
-            var handler = new RegisterHandler(_userServiceMock, _validator, _mapper, _jwtProviderMock, _passwordHasherMock);
+            var handler = new RegisterHandler(_userServiceMock, _validator, _mapperMock, _jwtProviderMock, _passwordHasherMock);
 
             var result = _validator.TestValidate(command);
 
@@ -98,14 +98,14 @@ namespace Manga.Application.UnitTests.Features.UserFeartures.Commands
             //Arrange
             var username = "username";
             var email = "test@test.com";
-            var password = "password";
+            var password = "password123!";
             var command = new RegisterCommand
             {
                 UserName = username,
                 Email = email,
                 Password = password
             };
-            var handler = new RegisterHandler(_userServiceMock, _validator, _mapper, _jwtProviderMock, _passwordHasherMock);
+            var handler = new RegisterHandler(_userServiceMock, _validator, _mapperMock, _jwtProviderMock, _passwordHasherMock);
             var user = new User
             {
                 UserName = username,
