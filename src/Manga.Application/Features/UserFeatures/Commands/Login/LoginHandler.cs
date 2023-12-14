@@ -20,12 +20,12 @@ namespace Manga.Application.Features.UserFeatures.Commands.Login
             _passwordHasher = passwordHasher;
         }
 
-        async Task<string> IRequestHandler<LoginCommand, string>.Handle(LoginCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
             var user = await _userService.GetByUserName(request.username);
             if (user is null)
             {
-                throw new InvalidCredentials($"There is no user with {request.username} username");
+                throw new InvalidCredentials($"Bad credentials");
             }
             if (!_passwordHasher.Verify(request.password, user.Password))
             {
